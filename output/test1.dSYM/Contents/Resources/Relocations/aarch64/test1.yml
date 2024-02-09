@@ -1,0 +1,10 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/miikka/Desktop/CPS188/CPS188/output/test1'
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _BubbleSort, symObjAddr: 0x0, symBinAddr: 0x100003BE8, symSize: 0xFC }
+  - { offsetInCU: 0x41, offset: 0x41, size: 0x8, addend: 0x0, symName: _BubbleSort, symObjAddr: 0x0, symBinAddr: 0x100003BE8, symSize: 0xFC }
+  - { offsetInCU: 0xAB, offset: 0xAB, size: 0x8, addend: 0x0, symName: _average, symObjAddr: 0xFC, symBinAddr: 0x100003CE4, symSize: 0xB8 }
+  - { offsetInCU: 0x119, offset: 0x119, size: 0x8, addend: 0x0, symName: _find_grade, symObjAddr: 0x1B4, symBinAddr: 0x100003D9C, symSize: 0xC8 }
+  - { offsetInCU: 0x179, offset: 0x179, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x27C, symBinAddr: 0x100003E64, symSize: 0xA0 }
+...

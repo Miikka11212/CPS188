@@ -1,54 +1,54 @@
 #include <stdio.h>
-
-void BubbleSort(double a[], int array_size)
+#include <stdlib.h>
+int main()
 {
-    int i, j;
-    for (i = 0; i < (array_size - 1); ++i)
+    // declare variables
+    int EmpNumber, NoOfShifts, i;
+    float BaseWageRate, hours;
+    float TotalHours, GrossPay;
+    char filename[40];
+    //printf("Enter file name: ");
+    //gets(filename);
+    // open file eneterd by user in read mode
+    FILE *fp = fopen("L4_data.txt", "r");
+    // check file is opened successfully or not
+    if (fp == NULL)
     {
-        for (j = 0; j < array_size - 1 - i; ++j )
+        printf("File %s doesnot exist or error in file opening!");
+        exit(0);
+    }
+    // display output table headers
+    printf("Employee Number\t\tTotal Hours\tGross Pay\n");
+    // read data from file line by line until eof()
+    while (!feof(fp))
+    {
+        // read employee number, no. of shifts and base wage rate
+        fscanf(fp, "%d%d%f", &EmpNumber, &NoOfShifts, &BaseWageRate);
+        // read hours worked from file and find total hours
+        TotalHours = 0;
+        i = 1;
+        while (i <= NoOfShifts)
         {
-            if (a[j] > a[j+1])
-            {
-                double temp = a[j+1];
-                a[j+1] = a[j];
-                a[j] = temp;
-            }
+            fscanf(fp, "%f", &hours);
+            TotalHours = TotalHours + hours;
+            i++;
         }
+        // calculate employee's gross pay
+        if (TotalHours <= 15)
+        {
+            GrossPay = BaseWageRate * TotalHours;
+        }
+        else if (TotalHours <= 25)
+        {
+            GrossPay = (BaseWageRate + (5 / 100.0 * BaseWageRate)) * TotalHours;
+        }
+        else
+        {
+            GrossPay = (BaseWageRate + (10 / 100.0 * BaseWageRate)) * TotalHours;
+        }
+        // display result
+        printf("%d\t\t\t%6.2f\t\t%8.2f\n", EmpNumber, TotalHours, GrossPay);
     }
-}
-
-double average(double quiz[], int size){
-    double sum = 0, avg;
-    BubbleSort(quiz, size);
-    quiz[0] = 0;
-    quiz[1] = 0;
-    for(int i = 0; i < size; i++){
-        sum += quiz[i];
-    }
-    avg = sum/size;
-    return avg;
-}
-
-
-double find_grade(double quiz[], double midterm, double final){
-    int size = 10; // Assuming fixed size for quiz array
-    double avg = average(quiz, size);
-    avg *= 0.25;
-    if (final >= midterm){
-        final *= 0.5;
-        midterm *= 0.25;
-    }
-    else {
-        final *= 0.35;
-        midterm *= 0.4;
-    }
-    return(avg + final + midterm);
-
-}
-
-int main(){
-    double quizzes[] = {9.5, 6, 4, 10, 7.8, 3.4, 9, 5.6, 9, 10};
-    double grade = find_grade(quizzes, 73, 84);
-    printf("%.2f\n", grade);
-    return 0;
+    // close file
+    fclose(fp);
 }
